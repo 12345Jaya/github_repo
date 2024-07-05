@@ -1,0 +1,162 @@
+git -> version control system 
+git -> tool
+GitHub -> platform that uses git
+
+. To store the various versions of documents, we use git.
+. If we have upgraded some features and released a new version, but we think that the old version is far more better than the new ones....how could you get it back?? it's not possible, to resolve this problem we have git which saves all the versions.
+
+How to install git
+------------------
+. git-scm.com/downloads
+. Windows
+. open the downloaded file, put all details and finally click on finish.
+. open power shell and give a command git, if there are options shown then git is installed.
+
+Project setup
+-------------
+. create a folder named git-tutorial on desktop
+. open it in Vscode and create a file namely config.js and a folder src containing index.js
+. open config.js and type console.log('console.js') console.log('version 1')
+. open index.js and type console.log('index.js') console.log('version 2')
+
+git setup
+---------
+. we can open power shell or git bash
+. first select drive cd c:
+. Then give the location where the folder is present
+  cd users/SATYANARAYANA/Desktop/git-tutorial
+
+. now initialize git          ->  git init
+. what changes have been      ->  git status    (untracked files ->config.js,src/)
+  (since prev version)
+. to add changes              ->  git add config.js
+                                  git add src
+                                  (or simply give git add .)
+. now again check status      ->  git status    (changes need to be commited) //staged
+. to configure email,name     ->  git config --global user.email "jayasri3002@gmail.com"
+                                  git config --global user.name "12345Jaya"
+. to commit                   ->  git commit -m "Version 1"
+. if we forgot to add a file  ->  git commit -m "Version 1" --amend
+  (version 1)
+  or if we want to rename
+. to check committed changes  ->  git log
+. to take out of staging area ->  git reset config.js
+                                  git reset .
+. to take out of working area ->  git checkout -- config.js
+. to switch the version       ->  git checkout commit hash 
+. to view all commits         ->  git log --all
+  (after switching to old version)
+. to show branching effect    ->  git log --all --graph
+. if we want to restore code  ->  git checkout commit hash file (/folder/.)
+  without going to that commit (no movement of head)
+. to create shortcut          ->  git config --global alias.s "status"
+
+** version in git => commit
+
+visualizing git
+---------------
+. Some code editors supports git visualization and integration.
+. In Vscode we have a third icon, which shows any changed file with M.
+. We can simply click on + if we want to add that file into github.
+. If we click + on folder, it simply means git add .
+. If we click - in staging area, it goes back to working area(changes).
+. If we click left arrow(<-) in working area, it goes back and all the changes are removed.
+
+Staging area (Staged changes)
+------------
+It is the area at which git puts all of the changes that we have picked using git add.
+. Changes that are present here will go to next version.
+
+Working area (Changes)
+------------
+. Changes we haven't used git add yet.
+. Changes that are present here will not go to next version.
+
+. Here we can observe that config.js that has console.log(‘version 2’) was added by git add, it is present in staging area.
+. Later if I made a change like config.js as console.log(‘version 2 updated’). It is not yet stages so it is present in changes (working area).
+. git tracks the changes not the files.
+
+Version history
+---------------
+1) create version 2 by changing console.log statement, git add . , git commit -m "version 2"
+2) create version 3 by changing console.log statement, git add . , git commit -m "version 3"
+3) give git log, now we can see 3 versions (version history)
+
+Switching versions
+------------------
+. Every commit has a commit hash (like an ID)
+. To switch the version -> git checkout commit hash (paste it)
+  //back to version2, console.log() changed, woww
+. But the magic is git log, it shows only 2 commits because it only considers the commits upto this commit (version) 
+. To view all commits we do -> git log --all
+. We can clearly observe the ```head```, which represents which version we are currently viewing.
+
+Restore code to a previous version
+----------------------------------
+code gets restored ->  git checkout commit hash
+
+Git branching Intro
+-------------------
+. Switch to version 1 and then edit console.log as version 1 updated, then give git log --all, you can see that this commit appears on the top.
+. When we say git log --all --graph, here we can see that the commit made is linked to version 1 as a branch.
+. Here we have head at branch version 1 updated commit and master is at version 3, when we do git checkout master, head shits to master branch and has version 3, version 2, version 1 in git log. (git log doesn't show unnamed branches)
+
+. We have a branch called master / main.
+. Branch name helps in two ways ->
+  1) to switch to commit having branch -> git checkout master
+  2) master points to latest commit in a branch
+. If we want to point out to commit having master -> git checkout master
+
+Restoring code like google docs
+-------------------------------
+. Google docs doesn't create a branch, instead it puts the modified version 1 on top of version 3
+. So without shifting the head to version 1 if I want to restore code from version 1, then we use git checkout commit hash file (/folder/.)
+. git checkout commit hash config.js
+  git checkout commit hash src
+  git checkout commit hash .
+  Here we need not bring back the head and our version 1 is restored.
+. give git commit -m "version 1 restored"
+
+Summary
+-------
+1) Create a version (before commit do git config --global user.email "...")
+   git init
+   git status
+   git add .
+   git commit -m "message"
+
+2) View previous versions
+   git log --all --graph
+   git checkout <commit_hash>   
+   git checkout <branch_name>
+
+3) restore to previous version
+   git checkout <hash|branch> <file|folder>
+   git commit -m "message"
+
+git alias (creating shortcut)
+---------
+1) git config --global alias.s "status"   (we can use git s instead of git status) 
+2) git config --global alias.cm "commit -m"
+3) git config --global alias.co "checkout"
+
+git ignore
+----------
+. Suppose there is a file that contains passwords or confidential data, which you don't want to put into version history.
+. Inside .gitignore add files like secrets.txt which need to be untracked.
+. This .gitignore file must be added into version history.
+. git add .
+  git commit -m "add git ignore"
+
+How to remove git from our project
+----------------------------------
+. rm -rf .git  (remove folder forcefully)
+. version history is saved in .git
+
+
+
+
+
+
+
+
