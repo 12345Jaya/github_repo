@@ -153,10 +153,3 @@ How to remove git from our project
 . rm -rf .git  (remove folder forcefully)
 . version history is saved in .git
 
-
-
-
-
-
-
-
